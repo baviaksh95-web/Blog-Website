@@ -1,0 +1,23 @@
+    {% extends 'base.html' %}
+    {% block header %}
+    <header class="masthead masthead-home">  <!-- Home background -->
+        <div class="text-overlay">
+            <h1>Clean Blog</h1>
+        </div>
+    </header>
+    {% endblock %}
+    {% block content %}
+    <h2>All Posts</h2>
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                        <span class="subheading">A Blog Theme by Starting Bootstrap</span>
+                <h4>
+                    <a href="{{url_for('show_post', post_id = post.id)}}"> {{post.title}}</a>
+                </h4>
+                            <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% endblock %}

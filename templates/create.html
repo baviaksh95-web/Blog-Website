@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+<header class="masthead masthead-post">
+        <div class="text-overlay">
+            <h1>CREATE POSTS</h1>
+        </div>
+    </header>
+{% endblock %}
+{% block content %}
+<div id="create">
+<div class ="container mt-4">
+    <span class="subheading">Create your Post</span>
+    <form method="post">
+        <div class="mb-3">
+            <input type="text" name="title" placeholder="Post Title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <textarea name="content" placeholder="Post Content" rows="10" class="form-control" required></textarea>
+        </div>
+        <button class="btn btn-primary"> Create Post</button>
+        <a href="{{url_for('home')}}" class="btn btn-secondary"> Cancel</a>
+    </form>
+</div>
+</div>
+{% endblock %}

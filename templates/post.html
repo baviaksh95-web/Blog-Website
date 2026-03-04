@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}  {{ requested_post.title }}  {% endblock %}
+
+{% block content %}
+<!-------Page Header----------->
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Post Title -->
+            <h2 class="card-title">
+                {{ requested_post.title }}
+            </h2>
+            <!-- Post Date -->
+            <p class="text-muted">
+                Posted on {{ requested_post.date_posted.strftime('%B %d, %Y') }}
+            </p>
+            <hr>
+            <!-- Post Content -->
+            <p class="card-text">
+                {{ requested_post.content }}
+            </p>
+            <hr>
+
+            <!-- Action Buttons -->
+            {% if edit_mode %}
+            <form method="post">
+                <input type="text" name="title" value="{{ requested_post.title}}" required>
+                <textarea name="content" rows="10" cols="80" required autofocus>
+                    {{requested_post.content }}
+                </textarea>
+                <button type="submit" class=btn btn-warning btn-sm"">
+                Update
+                </button>
+            </form>
+            {% else %}
+            <h1> {{ requested_post.title }}</h1>
+            <p> {{ requested_post.content }} </p>
+            <a href="{{ url_for('edit', post_id=requested_post.id) }}"
+            class="btn btn-warning btn-sm">
+                Edit
+            </a>
+        {% endif %}
+<!--            <form method="post">-->
+<!--                <input type="hidden" name="post_id" value="{{ requested_post.id }}">-->
+<!--            </form>-->
+
+            <form action="{{url_for('delete', post_id=requested_post.id)}}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Are you sure you want to delete this post?');">
+                    Delete
+                </button>
+            </form>
+
+            <a href="{{ url_for('home') }}"
+               class="btn btn-secondary btn-sm">
+               Back
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
